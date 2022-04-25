@@ -15,6 +15,10 @@ app.post("/sign-up", (req, res) => {
     res.send('OK');
 })
 
+app.get("/tweets", (req, res) => {
+    res.send(tweets);
+})
+
 app.listen(5000, () => {
     console.log("a aplicacao esta rodando normalmente");
 });

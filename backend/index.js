@@ -9,19 +9,16 @@ let usuarios = [];
 let tweets = [];
 
 app.post("/sign-up", (req, res) => {
-    console.log(req.body);
-    const usuario = req.body;
-    usuarios.push(usuario);
+    usuarios.push(req.body);
     res.send('OK');
 })
 
 app.get("/tweets", (req, res) => {
-    const tweets2 = listaTweets(tweets);
-    res.send(tweets2);
+    const tweets_send = listaTweets(tweets);
+    res.send(tweets_send);
 })
 
 app.post("/tweets", (req,res) => {
-    console.log(req.body);
     tweets.push(req.body);
     res.send('OK');
 })
@@ -31,13 +28,26 @@ app.listen(5000, () => {
 });
 
 function listaTweets(tweets) {
-    let lista_tweets = tweets.map(tweet => {
-        return {
-            username: tweet.username,
-		    avatar: verificaAvatar(tweet.username),
-	        tweet: tweet.tweet
+    let lista_tweets = [];
+    if (tweets.length <= 10) {
+        lista_tweets = tweets.map(tweet => {
+            return {
+                username: tweet.username,
+                avatar: verificaAvatar(tweet.username),
+                tweet: tweet.tweet
+            }
+        })
+    } else {
+        let inicio = tweets.length - 10
+        for (let i = inicio; i < tweets.length; i++) {
+            const tweet = {
+                username: tweets[i].username,
+                avatar: verificaAvatar(tweets[i].username),
+                tweet: tweets[i].tweet  
+            }
+            lista_tweets.push(tweet);
         }
-    })
+    }
     return lista_tweets;
 }
 

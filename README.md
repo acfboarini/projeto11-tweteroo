@@ -4,6 +4,8 @@
 
 ## How to run for development
 
+### back-end
+
 1. clone o repositorio
 
 2. instale as dependencias
@@ -17,3 +19,6 @@ npm i
 ```bash
 npm run dev
 ```
+
+### front-end
+1. abra o arquivo index.html com o seu navegador padrão
